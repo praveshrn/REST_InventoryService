@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "e2aefa30-7a83-43ca-a9a9-dda3fef8a26b",
+		"name": "REST_Inventory",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "findByName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"items have the correct id's\", () => {\r",
+							"   \r",
+							"    console.log(\"json response = \"+pm.response.json().items[0].id);\r",
+							"    pm.expect(pm.response.json().items[0].id).to.eql(3);\r",
+							"    pm.expect(pm.response.json().items[1].id).to.eql(4);\r",
+							"\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"item names have the correct length\", () => {\r",
+							"   const jsonResponse = pm.response.json();\r",
+							"   pm.expect(pm.response.json().items[0].name).to.have.lengthOf(10);\r",
+							"   pm.expect(pm.response.json().items[1].name).to.have.lengthOf(14);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", () => {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "client-id",
+						"value": "eship",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"lamp\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7000/inventory/services/findByName",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"inventory",
+						"services",
+						"findByName"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"items have the correct id's\", () => {\r",
+							"    console.log(\"json response 2= \"+pm.response.json().item.id);\r",
+							"    pm.expect(pm.response.json().item.id).to.eql(3);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"item names have the correct length\", () => {\r",
+							"   const jsonResponse = pm.response.json();\r",
+							"   pm.expect(pm.response.json().item.name).to.have.lengthOf(10);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", () => {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "client-id",
+						"value": "eship",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"itemId\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7000/inventory/services/findById",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"inventory",
+						"services",
+						"findById"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
